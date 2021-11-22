@@ -10,6 +10,9 @@ def create_tables():
 
 
 app.config.from_pyfile('config/settings.staging.cfg')
+# app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///
+# todo.db
+# app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 db.init_app(app)
 
 
