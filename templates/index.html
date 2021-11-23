@@ -28,16 +28,16 @@
 -->
 
 
-<form>
+<form method="post" action= "{{ url_for('todos.add_todo_item') }}">
     <div class="mb-3">
-        <label for="exampleInputEmail1" class="form-label">Title</label>
-        <input type="text" class="form-control" id="title" aria-describedby="emailHelp">
+        <label for="title" class="form-label">Title</label>
+        <input type="text" class="form-control" name="title" id="title" aria-describedby="emailHelp">
     </div>
     <div class="mb-3">
-        <label for="exampleInputPassword1" class="form-label">Description</label>
-        <input type="text" class="form-control" id="description">
+        <label for="description" class="form-label">Description</label>
+        <input type="text" class="form-control" name="description" id="description">
     </div>
-    <button type="submit" class="btn btn-primary">Submit</button>
+    <button type="submit" class="btn btn-dark">Submit</button>
 </form>
 <h1>Your Todos</h1>
 <table class="table">
@@ -47,16 +47,23 @@
         <th scope="col">Item</th>
         <th scope="col">Description</th>
         <th scope="col">Created At</th>
+        <th scope="col">Action</th>
+
     </tr>
     </thead>
     <tbody>
     {% for todo in all_todo %}
-        <tr>
-           <th scope="row">{{loop.index}}</th>
-            <td>{{todo.title}}</td>
-            <td>{{todo.content}}</td>
-            <td>{{todo.created_date}}</td>
-        </tr>
+    <tr>
+        <th scope="row">{{loop.index}}</th>
+        <td>{{todo.title}}</td>
+        <td>{{todo.content}}</td>
+        <td>{{todo.created_date}}</td>
+        <td>
+            <a href="delete/{{todo.sno}}" <button type="button" class="btn btn-dark mx-1">Delete</button>
+            <a href="update/{{todo.sno}}" <button type="button" class="btn btn-dark mx-1">Update</button>
+
+        </td>
+    </tr>
     {% endfor %}
     </tbody>
 </table>
