@@ -1,5 +1,6 @@
-from flask import Flask
+from flask import Flask, url_for, redirect
 from database.db import db
+from blueprints.todos import TODOS_BLUEPRINT
 
 app = Flask(__name__)
 
@@ -10,15 +11,13 @@ def create_tables():
 
 
 app.config.from_pyfile('config/settings.staging.cfg')
-# app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///
-# todo.db
-# app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 db.init_app(app)
+app.register_blueprint(TODOS_BLUEPRINT, url_prefix='/todos')
 
 
 @app.route('/')
 def home():
-    return "Hello"
+    return redirect(url_for('todos.get_todo_list'))
 
 
 if __name__ == '__main__':
